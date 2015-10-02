@@ -52,18 +52,29 @@ class SimpleMarkovGenerator(object):
         return " ".join(words)
 
 
+class TweetableMarkovGenerator(SimpleMarkovGenerator):
+    def fewer_chars(self,nutext):
+        print nutext,"NUUUUUUUUUUUUUUUUUU"
+        if len(nutext) > 140:
+            nutext = nutext[0:141]
+        print nutext
+        return nutext
+
+
 if __name__ == "__main__":
     # we should get list of filenames from sys.argv
 #     
     newmarkov = SimpleMarkovGenerator()
+
     textystuff = newmarkov.read_files(["green-eggs.txt"])
     newdictionary = newmarkov.make_chains(textystuff)
     all_our_text = newmarkov.make_text(newdictionary)
+print all_our_text,"ALL OUR TEXT "
+# print all_our_text
 
-    print all_our_text
-#     # we should call the make_text method 5x
-
-#     pass
+tweetmarkov = TweetableMarkovGenerator()
+tweetable_output = tweetmarkov.fewer_chars(all_our_text)
+print tweetable_output,"TWEETABLE OUTPUT",len(tweetable_output)
 
 
 # # import sys
